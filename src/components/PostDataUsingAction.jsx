@@ -5,21 +5,28 @@ const formAction = async (formData) => {
     'use server'
     await connectDB();
 
+    const data = new FormData();
+    data.append("name", formData.get("name"));
+    data.append("home", formData.get("home"));
+    data.append("imageUrl", formData.get("imageUrl") || "");
+
     const result = await PostModel.create({
-        name: formData.get("name"),
-        home: formData.get("home")
-    })
-    console.log("result0", result)
+        name: data.get("name"),
+        home: data.get("home"),
+        imageUrl: data.get("imageUrl"),
+    });
+    console.log("result", result);
 }
+
 const PostDataUsingAction = () => {
     return (
         <form action={formAction} className="max-w-md mx-auto">
             <div className="mb-4">
                 <label htmlFor="name" className="block text-white font-bold mb-2">
-                    name
+                    Name
                 </label>
                 <input
-                    placeholder="your name"
+                    placeholder="Your name"
                     type="text"
                     name="name"
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline placeholder-custom-black"
@@ -27,13 +34,24 @@ const PostDataUsingAction = () => {
             </div>
             <div className="mb-6">
                 <label htmlFor="home" className="block text-white font-bold mb-2">
-                    home
+                    Home
                 </label>
                 <input
-                    placeholder="your home"
+                    placeholder="Your home"
                     type="text"
                     name="home"
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline placeholder-custom-black"
+                />
+            </div>
+            <div className="mb-6">
+                <label htmlFor="imageUrl" className="block text-white font-bold mb-2">
+                    Image URL
+                </label>
+                <input
+                    type="text"
+                    name="imageUrl"
+                    placeholder="Enter image URL"
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 />
             </div>
             <div className="flex justify-center">
