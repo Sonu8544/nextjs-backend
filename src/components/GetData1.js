@@ -21,7 +21,7 @@ export default async function GetData1() {
                 allData.result.map((item, index) => (
                     <div key={index} className="mb-5" >
                         <h1 className="text-2xl" > Name: {item.name} </h1>
-                        <p> Name: {item.home} </p>
+                        <p> Home: {item.home} </p>
                         <hr />
                     </div>
                 ))
