@@ -1,7 +1,6 @@
 import connectDB from "@/lib/connectDB";
-import mongoose from "mongoose";
 import { NextResponse } from "next/server";
-import PostModel from "@/models/post";
+import PostModel from "@/models/Post";
 
 export async function GET(req) {
     try {
